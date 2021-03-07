@@ -14,7 +14,7 @@ RUN tar xvzf ${RACKET_SRC_FILE} && \
     make && \
     make install 
 
-RUN /racket/racket-${RACKET_VERSION}/bin/raco setup
+RUN /racket/racket-${RACKET_VERSION}/bin/raco setup --no-docs
 RUN /racket/racket-${RACKET_VERSION}/bin/raco pkg config --scope installation --set catalogs \
     https://download.racket-lang.org/releases/8.0/catalog/ \
     https://racksnaps.defn.io/snapshots/2021/03/06/catalog/
@@ -30,5 +30,6 @@ RUN /racket/racket-${RACKET_VERSION}/bin/raco pkg install --skip-installed --aut
     http-easy \
     sql
 
-CMD ["/racket/racket-${RACKET_VERSION}/bin/racket"]
+WORKDIR /app
+ENTRYPOINT ["/racket/racket-8.0/bin/racket"]
 
